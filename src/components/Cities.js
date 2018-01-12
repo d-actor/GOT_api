@@ -7,40 +7,34 @@ import {
   Grid,
   Image,
 } from 'semantic-ui-react';
-import GOT from '../images/G.jpg';
 import axios from 'axios';
 
-class Characters extends Component {
-  state = { characters: [] }
+class Cities extends Component {
+  state = { cities: [] }
 
   componentDidMount() {
-    axios.get('https://api.got.show/api/characters/')
+    axios.get('https://api.got.show/api/cities')
       .then( res => {
-        this.setState({ characters: res.data })
+        this.setState({ cities: res.data })
+        console.log(res.data);
     })
       .catch(err => {
         console.log(err.response);
   });
 }
 
-displayCharacters = () => {
-  const baseURL = 'https://api.got.show/'
-  return this.state.characters.map( char => {
+displayCities = () => {
+  return this.state.cities.map( city => {
     return(
       <Card>
         <Card.Content>
           <Card.Header>
-            {char.name}
+            {city.name}
             <hr />
-            {char.house}
+            {city.type}
           </Card.Header>
           <Card.Description>
-            {
-              char.imageLink ?
-              <Image src={baseURL + char.imageLink} />
-              :
-              <Image src={GOT}/>
-            }
+            More Info: <a>{city.link}</a>
           </Card.Description>
         </Card.Content>
       </Card>
@@ -53,13 +47,13 @@ displayCharacters = () => {
     return (
       <Container>
         <Header as='h1' textAlign='center'>Game Of Thrones API</Header>
-        <Header as='h3' textAlign='center'>Characters</Header>
+        <Header as='h3' textAlign='center'>Cities</Header>
         <Card.Group stackable itemsPerRow={3}>
-          { this.displayCharacters() }
+          { this.displayCities() }
         </Card.Group>
       </Container>
     );
   }
 }
 
-export default Characters;
+export default Cities;

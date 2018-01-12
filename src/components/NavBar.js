@@ -15,10 +15,13 @@ class NavBar extends Component {
       <div>
         <Menu pointing secondary>
           <Link to='/'>
-            <Menu.Item name='home' />
+            <Menu.Item name='Episodes' />
           </Link>
           <Link to='/characters'>
             <Menu.Item name='Characters' />
+          </Link>
+          <Link to='/cities'>
+            <Menu.Item name='Cities' />
           </Link>
           { this.rightNavs() }
         </Menu>
